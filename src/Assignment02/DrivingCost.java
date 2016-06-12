@@ -1,3 +1,5 @@
+package Assignment02;
+
 import java.util.Scanner;
 
 // Class: CS 1301/01

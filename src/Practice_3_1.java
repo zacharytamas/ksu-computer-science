@@ -3,7 +3,7 @@
 // Term: Summer 2016
 // Name: Zachary Jones
 // Instructor: Chad Teat
-// Lab: 2
+// Lab: 3
 
 import java.util.Scanner;
 

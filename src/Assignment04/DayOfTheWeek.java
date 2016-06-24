@@ -1,4 +1,4 @@
-// Class: CS 1301/01
+package Assignment04;// Class: CS 1301/01
 // Term: Summer 2016
 // Name: Zachary Jones
 // Instructor: Chad Teat

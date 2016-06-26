@@ -1,4 +1,4 @@
-
+package Lab03;
 // Class: CS 1301/01
 // Term: Summer 2016
 // Name: Zachary Jones
@@ -8,7 +8,7 @@
 import java.util.concurrent.ThreadLocalRandom;
 
 /**
- *  Write a Java program (name it Practice_3_2) that generates a
+ *  Write a Java program (name it Lab03.Practice_3_2) that generates a
  *  random number between 0 and 100 (representing a grade). The program
  *  then, on separate lines, prints out the generated grade followed by the
  *  corresponding letter grade (A, B, C, D, F) using the standard scale

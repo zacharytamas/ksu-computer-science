@@ -1,4 +1,4 @@
-
+package Lab03;
 // Class: CS 1301/01
 // Term: Summer 2016
 // Name: Zachary Jones
@@ -9,7 +9,7 @@ import java.util.Random;
 import java.util.Scanner;
 
 /**
- * Write a Java program (name it Practice_3_5) that generates three single-digit numbers (see
+ * Write a Java program (name it Lab03.Practice_3_5) that generates three single-digit numbers (see
  * program Guessing.java above or section 3.7 on how to generate random numbers) and prompts the user to
  * enter the sum of these three numbers. Print out the entered answer followed by the message “Correct!“ if the
  * answer is correct, or the message “Incorrect! The correct answer is ” if the entered answer is

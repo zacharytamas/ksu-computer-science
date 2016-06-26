@@ -1,4 +1,4 @@
-
+package Lab03;
 // Class: CS 1301/01
 // Term: Summer 2016
 // Name: Zachary Jones
@@ -8,7 +8,7 @@
 import java.util.Scanner;
 
 /**
- * Write a Java program (name it Practice_3_1) that reads from the user four
+ * Write a Java program (name it Lab03.Practice_3_1) that reads from the user four
  * grades between 0 and 100. The program then, on separate lines, prints out
  * the entered grades followed by the highest grade, lowest grade, and averages
  * of all four grades. Make sure to properly label your output. Use escape

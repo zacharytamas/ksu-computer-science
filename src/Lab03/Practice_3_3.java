@@ -1,4 +1,4 @@
-
+package Lab03;
 // Class: CS 1301/01
 // Term: Summer 2016
 // Name: Zachary Jones
@@ -8,7 +8,7 @@
 import java.util.Scanner;
 
 /**
- * Write a Java program (name it Practice_3_3) to implement a solution for the following problem.
+ * Write a Java program (name it Lab03.Practice_3_3) to implement a solution for the following problem.
  * The cost of international call from Atlanta to Beijing is calculated as follows:
  *
  *   Connection fee is $1.99; $2.00 for first three minutes; and $.45 for each additional minute.

@@ -26,7 +26,7 @@ public class MinMaxAvg {
       System.out.format("Min value: \t\t%d\n", min(x, y, z));
       System.out.format("Average value: \t%f\n", average(x, y, z));
 
-      System.out.print("Again? y/n ");
+      System.out.print("\nAgain? y/n ");
       if (scanner.next().toLowerCase().charAt(0) == 'n') break;
     }
 

@@ -5,8 +5,6 @@
 // Instructor: Chad Teat
 // Lab: 6
 
-import java.util.Scanner;
-
 public class Practice_6_1 {
 
   public static void main(String[] args) {

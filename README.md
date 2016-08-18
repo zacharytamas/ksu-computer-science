@@ -1,5 +1,3 @@
-# ksu-cs1301
+# ksu-computer-science
 
-The code I wrote in CS1301 at KSU.
-
-This was a super introductory programming class in Java that I was not allowed to skip despite 10+ years experience programming.
+This repository contains code that I wrote in KSU's Computer Science curriculum.

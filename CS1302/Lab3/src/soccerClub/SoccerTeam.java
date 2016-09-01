@@ -38,6 +38,7 @@ public class SoccerTeam {
     }
 
     public void printNumWinnings() {
+        int totalWinnings = 0;
         for (int i = 0; i < this.numberOfTournaments(); i++) {
             int winnings = 0;
             for (int j = 0; j < this.numberOfGamesInTournament(i); j++) {
@@ -45,9 +46,11 @@ public class SoccerTeam {
                     winnings += 1;
                 }
             }
+            totalWinnings += winnings;
             System.out.printf("Total winnings for Tournament %d: %d out of %d games\n",
                     i+1, winnings, this.scores[i].length);
         }
+        System.out.printf("Total winnings: %d\n", totalWinnings);
     }
 
     public void printTotalNumGoals() {

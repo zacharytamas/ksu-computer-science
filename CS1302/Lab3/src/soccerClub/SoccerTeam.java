@@ -21,14 +21,14 @@ public class SoccerTeam {
     }
 
     public void printScores() {
-        for (int i = 0; i < this.numberOfGames(); i++) {
+        for (int i = 0; i < this.maxGameCount(); i++) {
             System.out.printf("Game %d\t", i+1);
         }
 
 
         for (int i = 0; i < this.numberOfTournaments(); i++) {
             System.out.println();
-            for (int j = 0; j < this.numberOfGames(); j++) {
+            for (int j = 0; j < this.numberOfGamesInTournament(i); j++) {
                 int[] scores = this.scores[i][j];
                 System.out.printf("%s\t\t", this.formatScore(scores));
             }
@@ -40,7 +40,7 @@ public class SoccerTeam {
     public void printNumWinnings() {
         for (int i = 0; i < this.numberOfTournaments(); i++) {
             int winnings = 0;
-            for (int j = 0; j < this.numberOfGames(); j++) {
+            for (int j = 0; j < this.numberOfGamesInTournament(i); j++) {
                 if (didWin(this.scores[i][j])) {
                     winnings += 1;
                 }
@@ -54,7 +54,7 @@ public class SoccerTeam {
         int totalGoals = 0;
         for (int i = 0; i < this.numberOfTournaments(); i++) {
             int goals = 0;
-            for (int j = 0; j < this.numberOfGames(); j++) {
+            for (int j = 0; j < this.numberOfGamesInTournament(i); j++) {
                 goals += this.scores[i][j][0];
             }
             totalGoals += goals;
@@ -73,8 +73,17 @@ public class SoccerTeam {
         return this.scores.length;
     }
 
-    private int numberOfGames() {
-        return this.scores[0].length;
+    private int numberOfGamesInTournament(int i) {
+        return this.scores[i].length;
+    }
+
+    private int maxGameCount() {
+        int count = this.scores[0].length;
+        for (int i = 0; i < this.scores.length; i++) {
+            if (this.scores[i].length > count)
+                count = this.scores[i].length;
+        }
+        return count;
     }
 
     private String formatScore(int[] scores) {

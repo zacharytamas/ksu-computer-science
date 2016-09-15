@@ -138,4 +138,8 @@ public class BankAccount {
             this.resetMinBalance();
         }
     }
+
+    public void month_end_process() {
+        resetMinBalance();
+    }
 }

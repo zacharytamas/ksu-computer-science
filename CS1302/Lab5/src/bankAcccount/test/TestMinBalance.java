@@ -33,7 +33,7 @@ public class TestMinBalance {
     public void test1() {
         ba0.deposit(200);
         ba0.withdraw(50);
-//        assertEquals("Min balance is not correct", 0, ba0.getMinBalance(), EPS);
+        assertEquals("Min balance is not correct", 0, ba0.getMinBalance(), EPS);
     }
 
     /**
@@ -43,7 +43,7 @@ public class TestMinBalance {
     public void test2() {
         ba1.deposit(200);
         ba1.withdraw(50);
-//        assertEquals("Min balance is not correct", bal1, ba1.getMinBalance(), EPS);
+        assertEquals("Min balance is not correct", bal1, ba1.getMinBalance(), EPS);
     }
 
     /**
@@ -53,7 +53,7 @@ public class TestMinBalance {
     public void test3() {
         ba1.deposit(200);
         ba1.withdraw(250);
-//        assertEquals("Min balance is not correct", bal1-50, ba1.getMinBalance(), EPS);
+        assertEquals("Min balance is not correct", bal1-50, ba1.getMinBalance(), EPS);
     }
 
 
@@ -65,7 +65,7 @@ public class TestMinBalance {
         ba1.deposit(200);
         ba1.withdraw(250);
         ba1.deposit(100);
-//        assertEquals("Min balance is not correct", bal1-50, ba1.getMinBalance(), EPS);
+        assertEquals("Min balance is not correct", bal1-50, ba1.getMinBalance(), EPS);
     }
 
     /**
@@ -79,7 +79,7 @@ public class TestMinBalance {
         ba1.deposit(100);
         ba1.withdraw(50);
         ba1.deposit(100);
-//        assertEquals("Min balance is not correct", bal1 - 50, ba1.getMinBalance(), EPS);
+        assertEquals("Min balance is not correct", bal1 - 50, ba1.getMinBalance(), EPS);
     }
 
 
@@ -91,12 +91,12 @@ public class TestMinBalance {
     public void test6() {
         ba1.withdraw(50);  // 150
         ba1.deposit(200);  // 350
-//        assertEquals("", 150, ba1.getMinBalance(), EPS);
-//        ba1.resetMinBalance();
+        assertEquals("", 150, ba1.getMinBalance(), EPS);
+        ba1.resetMinBalance();
         ba1.withdraw(100);  // 250
         ba1.deposit(50);  // 300
         ba1.withdraw(100);  // 200
         ba1.deposit(100);  // 300
-//        assertEquals("", 200, ba1.getMinBalance(), EPS );
+        assertEquals("", 200, ba1.getMinBalance(), EPS );
     }
 }

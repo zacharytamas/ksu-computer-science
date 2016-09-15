@@ -8,6 +8,7 @@ public class BankAccount {
     private double balance;  // account balance
     private String accountId;  // unique account identifier
     private Person owner;  // owner of the account
+    private double minBalance;
 
 
 
@@ -22,7 +23,7 @@ public class BankAccount {
         accountId = initialAccountId;
         balance = 0.0;  // not necessary since balance will default to 0.0 if nothing else is done
                         // to initialize it.
-
+        resetMinBalance();
     }
 
     /**
@@ -41,7 +42,7 @@ public class BankAccount {
         } else {
             balance = initialBalance;
         }
-
+        resetMinBalance();
     }
 
     public BankAccount(String initialAccountid, double initialBalance, Person initialOwner) {
@@ -54,7 +55,7 @@ public class BankAccount {
         } else {
             balance = initialBalance;
         }
-
+        resetMinBalance();
     }
 
 
@@ -85,7 +86,7 @@ public class BankAccount {
             System.err.println("Amount of deposit should be positive: " + amount);
             System.exit(1);
         }
-
+        updateMinBalance();
     }
 
 
@@ -109,7 +110,7 @@ public class BankAccount {
             // amount  is ok, process the withdrawal
             balance -= amount;
         }
-
+        updateMinBalance();
     }
 
     public void setOwner(Person newOwner) {
@@ -120,5 +121,21 @@ public class BankAccount {
         return owner;
     }
 
+    public double getMinBalance() {
+        return minBalance;
+    }
 
+    public void setMinBalance(double minBalance) {
+        this.minBalance = minBalance;
+    }
+
+    public void resetMinBalance() {
+        this.minBalance = this.balance;
+    }
+
+    private void updateMinBalance() {
+        if (this.minBalance > this.balance) {
+            this.resetMinBalance();
+        }
+    }
 }

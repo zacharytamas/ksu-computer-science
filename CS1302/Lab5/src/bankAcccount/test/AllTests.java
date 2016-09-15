@@ -6,7 +6,7 @@ import org.junit.runners.Suite;
 
 @RunWith(Suite.class)
 @Suite.SuiteClasses({TestStructure.class, TestMinBalance.class,
-                TestMinBalanceForSavings.class, TestSavingsAccount.class})
+                TestMinBalanceForSavings.class, TestSavingsAccount.class, TestOwnershipTest.class, TestAccountsOwned.class})
 public class AllTests {
 
 

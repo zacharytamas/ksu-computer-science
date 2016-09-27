@@ -9,7 +9,16 @@ public class Maze {
     }
 
     public void displayMaze() {
-
+        for (int i = 0; i < maze.length; i++) {
+            for (int j = 0; j < maze[i].length; j++) {
+                if (maze[i][j] == 0) {
+                    System.out.print("# ");
+                } else if (maze[i][j] == 1) {
+                    System.out.print("  ");
+                }
+            }
+            System.out.println();
+        }
     }
 
     public void takeStep() {
@@ -21,6 +30,6 @@ public class Maze {
     }
 
     public void displayPath() {
-        
+
     }
 }

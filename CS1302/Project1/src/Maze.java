@@ -18,11 +18,14 @@ public class Maze {
 
     public class MazeState {
         public int[][] maze;
+        /**
+         * A cached version of where the mouse is so we can access it in constant time.
+         */
         public int[] mouseLocation;
 
         public MazeState(int[][] maze) {
             this.maze = maze.clone();
-            this.mouseLocation = new int[]{0, maze.length - 1};
+            this.mouseLocation = new int[]{maze.length - 1, 0};
             this.markCell(this.mouseLocation, Maze.MOUSE);
         }
 
@@ -49,16 +52,16 @@ public class Maze {
 
             switch (direction) {
                 case North:
-                    deltas[1] = -1;
+                    deltas[0] = -1;
                     break;
                 case East:
-                    deltas[0] = 1;
-                    break;
-                case South:
                     deltas[1] = 1;
                     break;
+                case South:
+                    deltas[0] = 1;
+                    break;
                 case West:
-                    deltas[0] = -1;
+                    deltas[1] = -1;
                     break;
             }
 
@@ -70,6 +73,7 @@ public class Maze {
             if (isTraversable(cell)) {
                 this.markCell(this.mouseLocation, Maze.VISITED); // unmark current mouse
                 this.markCell(cell, Maze.MOUSE);  // place new mouse
+                this.mouseLocation = cell;
             }
         }
     }

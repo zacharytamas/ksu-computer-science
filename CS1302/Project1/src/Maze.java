@@ -3,122 +3,122 @@
  */
 public class Maze {
 
-    public static final int WALL = 0;
-    public static final int OPEN = 1;
-    public static final int MOUSE = 2;
-    public static final int VISITED = 4;
+  public static final int WALL = 0;
+  public static final int OPEN = 1;
+  public static final int MOUSE = 2;
+  public static final int VISITED = 4;
+  private MazeState state;
 
-    enum MoveDirection {
-        Up, Right, Down, Left;
-    }
+  public Maze(int[][] mazeArray) {
+    this.state = new MazeState(mazeArray);
+  }
 
-    private MazeState state;
+  public void displayMaze() {
+    this.displayMaze(false);
+  }
 
-    public class MazeState {
-        public int[][] maze;
-        /**
-         * A cached version of where the mouse is so we can access it in constant time.
-         */
-        public int[] mouseLocation;
+  public void displayMaze(Boolean withPath) {
+    int[][] maze = this.state.maze;
 
-        public MazeState(int[][] maze) {
-            this.maze = maze.clone();
-            this.mouseLocation = new int[]{maze.length - 1, 0};
-            this.markCell(this.mouseLocation, Maze.MOUSE);
+    for (int[] cells : maze) {
+      for (int cell : cells) {
+        String cellOutput = "  ";
+
+        switch (cell) {
+          case Maze.WALL:
+            cellOutput = "# ";
+            break;
+          case Maze.MOUSE:
+            if (withPath) cellOutput = "@ ";
+            break;
+          case Maze.VISITED:
+            if (withPath) cellOutput = "~ ";
+            break;
         }
 
-        public MazeState(int[][] maze, int[] mouseLocation) {
-            this.maze = maze.clone();
-            this.mouseLocation = mouseLocation.clone();
-            this.markCell(this.mouseLocation, Maze.MOUSE);
-        }
+        System.out.print(cellOutput);
+      }
+      System.out.println();
+    }
+    System.out.println();
+  }
 
-        private void markCell(int[] cell, int id) {
-            this.maze[cell[0]][cell[1]] = id;
-        }
+  public void takeStep(MoveDirection direction) {
+    this.state.move(direction);
+  }
 
-        private Boolean isTraversable(int[] cell) {
-            try {
-                return this.maze[cell[0]][cell[1]] != Maze.WALL;
-            } catch (ArrayIndexOutOfBoundsException e) {
-                return false;
-            }
-        }
+  public void findExit() {
 
-        void move(MoveDirection direction) {
-            int[] deltas = new int[2];
+  }
 
-            switch (direction) {
-                case Up:
-                    deltas[0] = -1;
-                    break;
-                case Right:
-                    deltas[1] = 1;
-                    break;
-                case Down:
-                    deltas[0] = 1;
-                    break;
-                case Left:
-                    deltas[1] = -1;
-                    break;
-            }
+  public void displayPath() {
+    this.displayMaze(true);
+  }
 
-            int[] cell = new int[]{
-                    this.mouseLocation[0] + deltas[0],
-                    this.mouseLocation[1] + deltas[1]
-            };
+  enum MoveDirection {
+    Up, Right, Down, Left;
+  }
 
-            if (isTraversable(cell)) {
-                this.markCell(this.mouseLocation, Maze.VISITED); // unmark current mouse
-                this.markCell(cell, Maze.MOUSE);  // place new mouse
-                this.mouseLocation = cell;
-            }
-        }
+  public class MazeState {
+    public int[][] maze;
+    /**
+     * A cached version of where the mouse is so we can access it in constant time.
+     */
+    public int[] mouseLocation;
+
+    public MazeState(int[][] maze) {
+      this.maze = maze.clone();
+      this.mouseLocation = new int[]{maze.length - 1, 0};
+      this.markCell(this.mouseLocation, Maze.MOUSE);
     }
 
-    public Maze(int[][] mazeArray) {
-        this.state = new MazeState(mazeArray);
+    public MazeState(int[][] maze, int[] mouseLocation) {
+      this.maze = maze.clone();
+      this.mouseLocation = mouseLocation.clone();
+      this.markCell(this.mouseLocation, Maze.MOUSE);
     }
 
-    public void displayMaze() {
-        this.displayMaze(false);
+    private void markCell(int[] cell, int id) {
+      this.maze[cell[0]][cell[1]] = id;
     }
 
-    public void displayMaze(Boolean withPath) {
-        int[][] maze = this.state.maze;
-
-        for (int[] cells : maze) {
-            for (int cell : cells) {
-                String cellOutput = "  ";
-
-                switch (cell) {
-                    case Maze.WALL:
-                        cellOutput = "# ";
-                        break;
-                    case Maze.MOUSE:
-                        if (withPath) cellOutput = "@ ";
-                        break;
-                    case Maze.VISITED:
-                        if (withPath) cellOutput = "~ ";
-                        break;
-                }
-
-                System.out.print(cellOutput);
-            }
-            System.out.println();
-        }
-        System.out.println();
+    private Boolean isTraversable(int[] cell) {
+      try {
+        return this.maze[cell[0]][cell[1]] != Maze.WALL;
+      } catch (ArrayIndexOutOfBoundsException e) {
+        return false;
+      }
     }
 
-    public void takeStep(MoveDirection direction) {
-        this.state.move(direction);
-    }
 
-    public void findExit() {
+    void move(MoveDirection direction) {
+      int[] deltas = new int[2];
 
-    }
+      switch (direction) {
+        case Up:
+          deltas[0] = -1;
+          break;
+        case Right:
+          deltas[1] = 1;
+          break;
+        case Down:
+          deltas[0] = 1;
+          break;
+        case Left:
+          deltas[1] = -1;
+          break;
+      }
 
-    public void displayPath() {
-        this.displayMaze(true);
+      int[] cell = new int[]{
+              this.mouseLocation[0] + deltas[0],
+              this.mouseLocation[1] + deltas[1]
+      };
+
+      if (isTraversable(cell)) {
+        this.markCell(this.mouseLocation, Maze.VISITED); // unmark current mouse
+        this.markCell(cell, Maze.MOUSE);  // place new mouse
+        this.mouseLocation = cell;
+      }
     }
+  }
 }

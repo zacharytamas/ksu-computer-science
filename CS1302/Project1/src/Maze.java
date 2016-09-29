@@ -1,5 +1,3 @@
-import java.util.Arrays;
-
 /**
  * Created by zacharytamas on 9/26/16.
  */
@@ -10,8 +8,8 @@ public class Maze {
     public static final int MOUSE = 2;
     public static final int VISITED = 4;
 
-    public enum MoveDirection {
-        North, East, South, West;
+    enum MoveDirection {
+        Up, Right, Down, Left;
     }
 
     private MazeState state;
@@ -47,20 +45,20 @@ public class Maze {
             }
         }
 
-        public void move(MoveDirection direction) {
+        void move(MoveDirection direction) {
             int[] deltas = new int[2];
 
             switch (direction) {
-                case North:
+                case Up:
                     deltas[0] = -1;
                     break;
-                case East:
+                case Right:
                     deltas[1] = 1;
                     break;
-                case South:
+                case Down:
                     deltas[0] = 1;
                     break;
-                case West:
+                case Left:
                     deltas[1] = -1;
                     break;
             }
@@ -89,16 +87,13 @@ public class Maze {
     public void displayMaze(Boolean withPath) {
         int[][] maze = this.state.maze;
 
-        for (int i = 0; i < maze.length; i++) {
-            for (int j = 0; j < maze[i].length; j++) {
+        for (int[] cells : maze) {
+            for (int cell : cells) {
                 String cellOutput = "  ";
 
-                switch (maze[i][j]) {
+                switch (cell) {
                     case Maze.WALL:
                         cellOutput = "# ";
-                        break;
-                    case Maze.OPEN:
-                        cellOutput = "  ";
                         break;
                     case Maze.MOUSE:
                         if (withPath) cellOutput = "@ ";

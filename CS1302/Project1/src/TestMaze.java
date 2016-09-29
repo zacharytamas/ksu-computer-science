@@ -25,7 +25,7 @@ public class TestMaze {
 
         Maze myMaze = new Maze(mazeArray);
         myMaze.displayMaze();
-        myMaze.takeStep(Maze.MoveDirection.North);
+        myMaze.takeStep(Maze.MoveDirection.Up);
         myMaze.findExit();
         myMaze.displayPath();
 

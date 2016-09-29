@@ -1,3 +1,7 @@
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.TreeSet;
+
 /**
  * Created by zacharytamas on 9/26/16.
  */
@@ -18,7 +22,7 @@ public class Maze {
   }
 
   public void displayMaze(Boolean withPath) {
-    int[][] maze = this.state.maze;
+    int[][] maze = this.state.getMap();
 
     for (int[] cells : maze) {
       for (int cell : cells) {
@@ -43,11 +47,37 @@ public class Maze {
     System.out.println();
   }
 
-  public void takeStep(MoveDirection direction) {
-    this.state.move(direction);
+  public void takeStep(MazeState.MoveDirection direction) {
+    this.state = this.state.stateForMove(direction);
   }
 
   public void findExit() {
+    ArrayList<MazeState> frontier = new ArrayList<>();
+    HashSet<String> visited = new HashSet<>();
+    frontier.add(this.state);
+
+    while (frontier.size() > 0) {
+      MazeState current = frontier.remove(0);
+
+      if (visited.contains(current.hashKey())) {
+        // We've already been here.
+        continue;
+      }
+
+      // Mark this location as visited.
+      visited.add(current.hashKey());
+
+      // Found the exit!
+      if (current.isGoal()) {
+        this.state = current;
+        return;
+      } else {
+        // We need to keep looking. To do this we'll find out where we can go
+        // from this state and queue those states to be explored. Eventually
+        // (assuming there is an exit) we'll find it.
+        frontier.addAll(current.possibleNextSteps());
+      }
+    }
 
   }
 
@@ -55,70 +85,4 @@ public class Maze {
     this.displayMaze(true);
   }
 
-  enum MoveDirection {
-    Up, Right, Down, Left;
-  }
-
-  public class MazeState {
-    public int[][] maze;
-    /**
-     * A cached version of where the mouse is so we can access it in constant time.
-     */
-    public int[] mouseLocation;
-
-    public MazeState(int[][] maze) {
-      this.maze = maze.clone();
-      this.mouseLocation = new int[]{maze.length - 1, 0};
-      this.markCell(this.mouseLocation, Maze.MOUSE);
-    }
-
-    public MazeState(int[][] maze, int[] mouseLocation) {
-      this.maze = maze.clone();
-      this.mouseLocation = mouseLocation.clone();
-      this.markCell(this.mouseLocation, Maze.MOUSE);
-    }
-
-    private void markCell(int[] cell, int id) {
-      this.maze[cell[0]][cell[1]] = id;
-    }
-
-    private Boolean isTraversable(int[] cell) {
-      try {
-        return this.maze[cell[0]][cell[1]] != Maze.WALL;
-      } catch (ArrayIndexOutOfBoundsException e) {
-        return false;
-      }
-    }
-
-
-    void move(MoveDirection direction) {
-      int[] deltas = new int[2];
-
-      switch (direction) {
-        case Up:
-          deltas[0] = -1;
-          break;
-        case Right:
-          deltas[1] = 1;
-          break;
-        case Down:
-          deltas[0] = 1;
-          break;
-        case Left:
-          deltas[1] = -1;
-          break;
-      }
-
-      int[] cell = new int[]{
-              this.mouseLocation[0] + deltas[0],
-              this.mouseLocation[1] + deltas[1]
-      };
-
-      if (isTraversable(cell)) {
-        this.markCell(this.mouseLocation, Maze.VISITED); // unmark current mouse
-        this.markCell(cell, Maze.MOUSE);  // place new mouse
-        this.mouseLocation = cell;
-      }
-    }
-  }
 }

@@ -48,7 +48,8 @@ public class Maze {
   }
 
   public void takeStep(MazeState.MoveDirection direction) {
-    this.state = this.state.stateForMove(direction);
+    MazeState newState = this.state.stateForMove(direction);
+    if (newState != null) this.state = newState;
   }
 
   public void findExit() {
@@ -62,13 +63,13 @@ public class Maze {
       if (visited.contains(current.hashKey())) {
         // We've already been here.
         continue;
+      } else {
+        // Mark this location as visited.
+        visited.add(current.hashKey());
       }
 
-      // Mark this location as visited.
-      visited.add(current.hashKey());
-
-      // Found the exit!
       if (current.isGoal()) {
+        // Found the exit!
         this.state = current;
         return;
       } else {
@@ -81,7 +82,7 @@ public class Maze {
 
   }
 
-  public void displayPath() {
+  void displayPath() {
     this.displayMaze(true);
   }
 

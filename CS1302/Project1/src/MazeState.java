@@ -84,7 +84,7 @@ public class MazeState {
   private Boolean isTraversable(int[] cellCoords) {
     try {
       int cellValue = this.map[cellCoords[0]][cellCoords[1]];
-      return cellValue == Maze.OPEN;
+      return cellValue != Maze.WALL;
     } catch (ArrayIndexOutOfBoundsException e) {
       return false;
     }

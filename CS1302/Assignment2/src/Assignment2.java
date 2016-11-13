@@ -39,8 +39,9 @@ public class Assignment2 {
     }
 
     public static void main(String[] args) {
-        int[] weights = new int[]{9, 54, 138, 143, 157, 160, 171, 172, 175, 196, 213, 223, 228, 246, 283};
-        System.out.print(maximize(weights, 2504));
+        int[] weights = new int[]{19,30,130,137,173,182,209,225,259,260};
+        System.out.println(maximize(weights, 1082));
+        System.out.println(maximize(weights, 1574));
     }
 
 }

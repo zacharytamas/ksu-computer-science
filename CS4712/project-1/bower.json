@@ -1,0 +1,22 @@
+{
+  "name": "calculator",
+  "description": "A calculator application for my class.",
+  "main": "main.js",
+  "authors": [
+    "Zachary Jones <zacharytamas@gmail.com>"
+  ],
+  "license": "CC0-1.0",
+  "keywords": [
+    "Electron",
+    "web-components"
+  ],
+  "homepage": "https://github.com/zacharytamas/ksu-computer-science",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}

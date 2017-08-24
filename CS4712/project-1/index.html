@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+
+    <title>Calculator</title>
+
+    <style>
+
+      body {
+        padding: 3em;
+      }
+
+      form#calculatorForm {
+        max-width: 300px;
+        margin: 0 auto;
+        text-align: center;
+      }
+
+      .input-row {
+        margin: 2em 0;
+      }
+
+      #result {
+        margin: 2em 0;
+      }
+
+    </style>
+
+  </head>
+  <body>
+
+    <form id="calculatorForm">
+
+      <div class="input-row">
+        <input type="text" name="term1" required>
+        +
+        <input type="text" name="term2" required>
+      </div>
+
+      <input type="submit" value="Add'em Up">
+
+      <div id="result">Result</div>
+
+    </form>
+
+  </body>
+
+  <script>
+
+    // You can also require other files to run in this process
+    require('./renderer.js')
+
+    const form = document.getElementById('calculatorForm');
+    const term1Input = form.querySelector('input[name="term1"]');
+    const term2Input = form.querySelector('input[name="term2"]');
+    const resultEl = form.querySelector('#result');
+
+    form.addEventListener('submit', (event) => {
+      event.preventDefault();
+
+      const term1 = Number(term1Input.value);
+      const term2 = Number(term2Input.value);
+
+      const value = term1 + term2;
+
+      resultEl.innerText = value;
+    });
+
+  </script>
+</html>

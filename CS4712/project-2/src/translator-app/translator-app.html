@@ -1,0 +1,139 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../bower_components/iron-flex-layout/iron-flex-layout.html">
+<link rel="import" href="../../bower_components/paper-card/paper-card.html">
+<link rel="import" href="../../bower_components/polymer/lib/elements/dom-if.html">
+<link rel="import" href="../../bower_components/paper-spinner/paper-spinner.html">
+<link rel="import" href="../../bower_components/paper-input/paper-input.html">
+
+<link rel="import" href="../translation-field/translation-field.html">
+
+<dom-module id="translator-app">
+  <template>
+    <style>
+      :host {
+        @apply --layout-fit;
+
+        display: block;
+        padding: 16px;
+        background: #eee;
+      }
+
+      paper-card {
+        height: 100%;
+        padding: 16px;
+        width: 100%;
+      }
+
+      .grid {
+        @apply --layout-vertical;
+
+        height: 100%;
+        width: 100%;
+      }
+
+      .horizontal-layout {
+        @apply --layout-horizontal;
+        @apply --layout-center;
+      }
+
+      .horizontal-layout > * {
+        @apply --layout-flex;
+      }
+
+      .horizontal-layout > *:first-child {
+        padding-right: 16px;
+      }
+
+      .horizontal-layout > *:last-child {
+        padding-left: 16px;
+      }
+
+      .field-container {
+        @apply --layout-flex;
+      }
+
+      .language-bar {
+        border-bottom: 1px #ccc solid;
+        padding: 16px 0;
+        margin-bottom: 8px;
+      }
+
+      paper-spinner[hidden] {
+        display: none;
+      }
+
+    </style>
+
+    <paper-card>
+      <div class="grid">
+        <div class="horizontal-layout language-bar">
+          <div><b>Source Language:</b> English</div>
+          <div><b>Target Language:</b> [[targetLanguage.name]]</div>
+        </div>
+
+        <div class="horizontal-layout field-container">
+          <translation-field text="{{sourceText}}"></translation-field>
+          <div>
+            <paper-spinner
+              hidden$="[[!isTranslating]]"
+              active="[[isTranslating]]"></paper-spinner>
+
+            <template is="dom-if" if="[[!isTranslating]]">
+              [[targetText]]
+            </template>
+          </div>
+        </div>
+      </div>
+    </paper-card>
+
+  </template>
+
+  <script>
+    /**
+     * @customElement
+     * @polymer
+     */
+    class TranslatorApp extends Polymer.Element {
+      static get is() { return 'translator-app'; }
+      static get properties() {
+        return {
+          sourceText: {
+            type: String,
+            observer: '_sourceTextChanged'
+          },
+          targetText: String,
+          targetLanguage: {
+            type: Object,
+            value: () => ({
+              name: 'Spanish',
+              code: 'es'
+            })
+          }
+        };
+      }
+
+      _sourceTextChanged() {
+
+        this._translateDebounce = Polymer.Debouncer.debounce(
+          this._translateDebounce,
+          Polymer.Async.timeOut.after(250),
+          () => this._translate());
+
+      }
+
+      _translate() {
+        this.isTranslating = true;
+
+        setTimeout(() => {
+          this.isTranslating = false;
+
+          // TODO Hard-coded
+          this.targetText = "Hola, como estas?";
+
+        }, Math.random() * 1500);
+      }
+    }
+
+    window.customElements.define(TranslatorApp.is, TranslatorApp);
+  </script>
+</dom-module>

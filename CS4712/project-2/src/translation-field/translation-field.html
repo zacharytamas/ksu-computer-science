@@ -1,0 +1,44 @@
+<!-- Hola como estas -->
+
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../bower_components/paper-input/paper-textarea.html">
+
+<dom-module id="translation-field">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+
+      paper-textarea {
+        width: 100%;
+        height: 100%;
+      }
+    </style>
+
+    <paper-textarea no-label-float
+      placeholder="Enter text to translate."
+      value="{{text}}"></paper-textarea>
+
+  </template>
+
+  <script>
+    /**
+     * @customElement
+     * @polymer
+     */
+    class TranslationField extends Polymer.Element {
+      static get is() { return 'translation-field'; }
+      static get properties() {
+        return {
+          text: {
+            type: String,
+            notify: true
+          }
+        };
+      }
+    }
+
+    window.customElements.define(TranslationField.is, TranslationField);
+  </script>
+</dom-module>

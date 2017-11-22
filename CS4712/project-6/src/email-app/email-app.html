@@ -1,0 +1,92 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../bower_components/iron-flex-layout/iron-flex-layout.html">
+<link rel="import" href="../../bower_components/paper-card/paper-card.html">
+<link rel="import" href="../../bower_components/polymer/lib/elements/dom-if.html">
+<link rel="import" href="../../bower_components/paper-spinner/paper-spinner.html">
+<link rel="import" href="../../bower_components/paper-input/paper-input.html">
+<link rel="import" href="../../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../../bower_components/paper-input/paper-textarea.html">
+
+
+<dom-module id="email-app">
+  <template>
+    <style>
+      :host {
+        @apply --layout-fit;
+
+        display: block;
+        padding: 16px;
+        background: #eee;
+      }
+
+      paper-card {
+        height: 100%;
+        padding: 16px;
+        width: 100%;
+      }
+
+      .buttons {
+        @apply --layout-horizontal;
+        padding: 9px;
+      }
+
+      .buttons .button {
+        text-align: center;
+        @apply --layout-flex;
+      }
+
+      .vertical-layout {
+        @apply --layout-vertical;
+        height: 100%;
+        /* @apply --layout-fit; */
+      }
+
+      .vertical-layout .inputs {
+        @apply --layout-flex;
+        border-bottom: 1px #eee solid;
+      }
+
+    </style>
+
+    <paper-card>
+
+      <div class="vertical-layout">
+        <div class="inputs">
+          <paper-input label="To:"></paper-input>
+          <paper-input label="From:"></paper-input>
+          <paper-input label="Subject:"></paper-input>
+          <paper-textarea label="Message:"></paper-textarea>
+        </div>
+        <div class="buttons">
+          <div class="button">
+            <paper-button raised>Send Email</paper-button>
+          </div>
+          <div class="button">
+            <paper-button>Cancel</paper-button>
+          </div>
+        </div>
+      </div>
+
+    </paper-card>
+
+  </template>
+
+  <script>
+    /**
+     * @customElement
+     * @polymer
+     */
+    class EmailApp extends Polymer.Element {
+      static get is() { return 'email-app'; }
+      static get properties() {
+        return {
+
+        };
+      }
+
+
+    }
+
+    window.customElements.define(EmailApp.is, EmailApp);
+  </script>
+</dom-module>

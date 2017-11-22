@@ -1,0 +1,7 @@
+{
+  "name": "translator",
+  "short_name": "translator",
+  "description": "A Translator app",
+  "start_url": "/",
+  "display": "standalone"
+}

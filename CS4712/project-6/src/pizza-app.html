@@ -1,0 +1,182 @@
+<link rel="import" href="../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../bower_components/iron-flex-layout/iron-flex-layout.html">
+<link rel="import" href="../bower_components/paper-card/paper-card.html">
+<link rel="import" href="../bower_components/paper-input/paper-input.html">
+<link rel="import" href="../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../bower_components/paper-radio-group/paper-radio-group.html">
+<link rel="import" href="../bower_components/paper-radio-button/paper-radio-button.html">
+
+
+<dom-module id="pizza-app">
+  <template>
+    <style>
+      :host {
+        @apply --layout-fit;
+
+        display: block;
+        padding: 16px;
+        background: #FEF6DB;
+
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif
+      }
+
+      paper-card {
+        width: 100%;
+        padding: 16px;
+        border-radius: 3px;
+        /* border: 2px solid rgba(0, 0, 0, .45); */
+      }
+
+      img.pizza-logo {
+        width: 150px;
+      }
+
+      .masthead {
+        @apply --layout-horizontal;
+        @apply --layout-center;
+      }
+
+      .masthead .brand {
+        font-family: 'Baskerville';
+        font-weight: 700;
+        font-size: 32px;
+        display: block;
+        line-height: 1.5em;
+      }
+
+      .layout-horizontal {
+        @apply --layout-horizontal;
+      }
+
+      .layout-horizontal > * {
+        @apply --layout-flex;
+      }
+
+      .layout-horizontal > *:first-child {
+        margin-right: 16px;
+      }
+
+      p {
+        margin: 0;
+      }
+
+      .pizza-container {
+        display: flex;
+
+        justify-content: center;
+        align-items: center;
+        height: 155px;
+      }
+
+      .pizza-container img {
+        width: 100%;
+        transition: width .5s, height .5s;
+      }
+
+      .pizza-container.medium img {
+        width: 75%;
+      }
+
+      .pizza-container.small img {
+        width: 60%;
+      }
+
+      .size-chooser {
+        display: flex;
+        @apply --layout-center;
+      }
+
+      .alert-warning {
+        background: #F1B80F;
+        color: rgba(0, 0, 0, .75);
+        border-radius: 2px;
+        padding: 8px;
+        margin: 8px 0;
+      }
+
+      input[type="text"] {
+        font-size: 16px;
+        display: inline-block;
+      }
+
+      paper-button.submit {
+        background: #FEF6DB;
+        font-weight: bold;
+      }
+
+    </style>
+
+    <div class="masthead">
+      <img src="src/pizza.jpg" alt="pizza" class="pizza-logo">
+      <div>
+        <span class="brand">Zachary's Pizzeria</span>
+        <span>Where you can have any pizza you'd like as long as it's pepperoni.</span>
+      </div>
+    </div>
+
+    <div class="layout-horizontal">
+
+      <paper-card class="layout-horizontal">
+        <div class$="pizza-container [[pizzaSize]]">
+          <img src="src/pizza-top.jpg" alt="Your Pizza">
+        </div>
+        <div class="size-chooser">
+          <paper-radio-group aria-labelledby="pizzaSize" selected="{{pizzaSize}}" attr-for-selected="name">
+            <paper-radio-button name="small">Small ($6)</paper-radio-button>
+            <paper-radio-button name="medium">Medium ($10)</paper-radio-button>
+            <paper-radio-button name="large">Large ($14)</paper-radio-button>
+          </paper-radio-group>
+        </div>
+      </paper-card>
+
+      <paper-card>
+        <div>
+          <label for="name">Your Name:</label>
+          <input type="text" name="name" id="name">
+        </div>
+
+        <div>
+          <paper-radio-group aria-labelledby="orderType" selected="{{orderType}}" attr-for-selected="name">
+            <paper-radio-button name="takeaway">Takeaway</paper-radio-button>
+            <paper-radio-button name="delivery" disabled>Delivery</paper-radio-button>
+          </paper-radio-group>
+
+          <div class="alert-warning">We're sorry, delivery is not currently available.</div>
+
+          <div class="layout-horizontal">
+            <paper-button>Cancel Order</paper-button>
+            <paper-button raised class="submit">Submit Order</paper-button>
+          </div>
+        </div>
+      </paper-card>
+
+    </div>
+
+  </template>
+
+  <script>
+    /**
+     * @customElement
+     * @polymer
+     */
+    class PizzaApp extends Polymer.Element {
+      static get is() { return 'pizza-app'; }
+      static get properties() {
+        return {
+          pizzaSize: {
+            type: String,
+            value: 'medium'
+          },
+          orderType: {
+            type: String,
+            value: 'takeaway'
+          }
+        };
+      }
+
+
+    }
+
+    window.customElements.define(PizzaApp.is, PizzaApp);
+  </script>
+</dom-module>

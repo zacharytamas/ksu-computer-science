@@ -1,0 +1,32 @@
+{
+  "name": "translator",
+  "version": "1.0.0",
+  "description": "A translation application for my class.",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "private": true,
+  "repository": "https://github.com/zacharytamas/ksu-computer-science",
+  "keywords": [
+    "Electron",
+    "web-components"
+  ],
+  "flat": true,
+  "author": "Zachary Jones <zacharytamas@gmail.com>",
+  "license": "CC0-1.0",
+  "devDependencies": {
+    "electron": "^1.7.6"
+  },
+  "dependencies": {
+    "@polymer/polymer": "next",
+    "@webcomponents/webcomponentsjs": "^1.0.10",
+    "ts-custom-elements": "^1.0.0"
+  },
+  "resolutions": {
+    "debug": "2.6.8",
+    "minimist": "1.2.0",
+    "readable-stream": "2.3.3",
+    "assert-plus": "1.0.0"
+  }
+}
